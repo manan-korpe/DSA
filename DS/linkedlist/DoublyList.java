@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
 class Node{
+    Node pre=null;
     int data;
     Node next=null;
 
@@ -9,7 +10,7 @@ class Node{
     }   
 }
 
-class SinglyList{
+class DoublyList{
     private Node head=null;
 
     public void insertStart(int value){
@@ -18,10 +19,11 @@ class SinglyList{
             head = newNode;
         }else{
             newNode.next = head;
+            head.pre = newNode;
             head = newNode;
         }
     }
-
+    
     public void insertEnd(int value){
         Node newNode = new Node(value);
 
@@ -33,7 +35,19 @@ class SinglyList{
                 tempNode = tempNode.next;
             }
             tempNode.next = newNode;
+            newNode.pre = tempNode;
         }
+    }
+
+    public void show(){
+        Node tempNode = head;
+        if(head != null){
+            do{
+                System.out.print(tempNode.data+" -> ");
+                tempNode = tempNode.next;
+            }while(tempNode != null);
+        }
+        System.out.println("null");
     }
 
     public void removeStart(){
@@ -41,6 +55,7 @@ class SinglyList{
             System.out.println("Your dosen't have data");
         }else{
             head = head.next;
+            head.pre = null;
             System.out.println("Removed from Start Done");
         }
     }
@@ -75,6 +90,7 @@ class SinglyList{
                     break;
                 }else if(value == tempNode.data){
                     preNode.next = tempNode.next;
+                    tempNode.next.pre = preNode;
                     isFound = true;
                     break;
                 }
@@ -90,37 +106,9 @@ class SinglyList{
         } 
     }
 
-    public void find(int value){
-        Node tempNode = head;
-        boolean isFound = false;
-
-        do{
-            if(tempNode.data == value){
-                isFound = true;
-                break;
-            }
-            tempNode = tempNode.next;
-        }while(tempNode.next !=null);
-
-        if(isFound){
-            System.out.println("Value find in list and address is "+tempNode);
-        }else{
-            System.out.println("Value not found in list");
-        }
-    }
-
-    public void show(){
-        Node tempNode = head;
-        do{
-            System.out.print(tempNode.data+" -> ");
-            tempNode = tempNode.next;
-        }while(tempNode != null);
-        System.out.println("null");
-    }
-
     public static void main(String[] args){
         Scanner sc = new Scanner(System.in);
-        SinglyList list = new SinglyList();
+        DoublyList list = new DoublyList();
         boolean isContinue = true;
 
         do{
@@ -133,7 +121,7 @@ class SinglyList{
             System.out.println("| 4.Remove from End            |");
             System.out.println("| 5.Remove by value            |");
             System.out.println("| 6.show                       |");
-            System.out.println("| 7.Find                       |");
+            // System.out.println("| 7.Find                       |");
             System.out.println("| 0.exit                       |");
             System.out.println("|------------------------------|");
             System.out.print("Enter Choice : ");
@@ -166,11 +154,11 @@ class SinglyList{
                 case 6:
                     list.show();
                     break;
-                case 7:
-                    System.out.print("Enter value:");
-                    value = sc.nextInt();
-                    list.find(value);
-                    break;
+                // case 7:
+                //     System.out.print("Enter value:");
+                //     value = sc.nextInt();
+                //     list.find(value);
+                //     break;
                 case 0:
                     isContinue = false;
                     break;

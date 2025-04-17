@@ -33,7 +33,6 @@ class Merge {
             return;
         }
             int mid =min +(max-min)/2;
-            // System.out.println(mid);
             sort(arr,min,mid);
             sort(arr,mid+1,max);
             conc(arr,min,mid,max);

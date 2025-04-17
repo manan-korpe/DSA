@@ -1,6 +1,5 @@
 import java.util.Scanner;
 
-
 class HashTable{
     public String[] hash_table = new String[10];
 

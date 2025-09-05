@@ -1,26 +1,35 @@
-package sort;
 
 public class Counting {
     public static void sort(int[] arr){
-        
-        int[] countArr = {0,0,0,0,0};
-        int count = 0;
-        for(int i=0;i<arr.length;i++){
-            countArr[arr[i]] = countArr[arr[i]]+1;
+        int max = arr[0];
+        for(int i=1;i<arr.length;i++){
+            if(arr[i]>max){
+                max=arr[i];
+            }
         }
 
-        for(int i=0;i<countArr.length;i++){
-            for(int j=0;j<countArr[i];j++){
-                arr[count] = i;
-                count++;
-            }
-        }   
+        int[] frequency = new int[max+1];
+        int[] result = new int[arr.length];
+
+        
+        for(int i=0;i<arr.length;i++){
+            frequency[arr[i]] = frequency[arr[i]]+1;
+        }
+
+        int j=-1;
+        for(int i=0;i<frequency.length;i++){
+                while (frequency[i]>0) {
+                    result[++j] = i;
+                    frequency[i] = frequency[i]-1;
+                }
+        }
+        
+        for(int i=0;i<result.length;i++){
+            System.out.println(i+" : "+result[i]);
+        }
     }
     public static void main(String[] args) {
-        int[] arr = { 2, 3, 4, 2, 3, 2,3};
+        int[] arr = { 2, 3, 14, 2, 3, 2,10};
         sort(arr);
-        for(int i=0;i<arr.length;i++){
-            System.out.println(arr[i]);
-        }
     }
 }

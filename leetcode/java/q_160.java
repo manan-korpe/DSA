@@ -20,8 +20,7 @@ public class q_160 {
     }
 }
 
-//Time Complexity O(m + n) 
-//space complexity O(1)
+
 public Optimal {
     public ListNode getIntersectionNode(ListNode headA, ListNode headB) {
         if (headA == null || headB == null) return null;
